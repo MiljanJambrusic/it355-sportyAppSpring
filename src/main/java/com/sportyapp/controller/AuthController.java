@@ -1,7 +1,10 @@
 package com.sportyapp.controller;
 
+import com.sportyapp.configuration.jwt.JwtProvider;
+import com.sportyapp.model.JwtResponse;
 import com.sportyapp.model.Korisnici;
 import com.sportyapp.model.Role;
+import com.sportyapp.model.UserAuth;
 import com.sportyapp.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +13,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,8 +23,6 @@ import com.sportyapp.repository.korisniciRepository;
 
 
 import javax.validation.Valid;
-import java.security.SecureRandom;
-import java.util.InvalidPropertiesFormatException;
 import java.util.UUID;
 
 @RestController
@@ -41,6 +41,9 @@ public class AuthController {
     @Autowired
     PasswordEncoder encoder;
 
+    @Autowired
+    JwtProvider jwtProvider;
+
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody Korisnici user) {
         System.out.println(user);
@@ -49,11 +52,10 @@ public class AuthController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        String token = UUID.randomUUID().toString().toUpperCase();
-        Korisnici korisnik = userRepository.findBykorisnickoime(user.getKorisnickoime()).orElseThrow(() -> new UsernameNotFoundException("User Not Found with this username : " + user.getKorisnickoime()));
-        userRepository.setToken(korisnik.getK_id(),token);
+        String jwt = jwtProvider.generateJwtToken(authentication);
+        UserAuth userDetails = (UserAuth) authentication.getPrincipal();
 
-        return ResponseEntity.ok(token);
+        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
     }
 
     @PostMapping("/register")

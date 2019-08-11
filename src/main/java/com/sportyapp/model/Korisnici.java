@@ -31,10 +31,6 @@ public class Korisnici {
     private String password;
     @Column(name = "email")
     private String email;
-    @Column(name = "privilegije")
-    private int privilegije;
-    @Column(name = "token")
-    private String token;
     @ManyToMany
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -52,8 +48,6 @@ public class Korisnici {
         this.korisnickoime = korisnickoime;
         this.password = password;
         this.email = email;
-        this.privilegije = privilegije;
-        this.token = token;
     }
 
     public int getK_id() {
@@ -102,22 +96,6 @@ public class Korisnici {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public int getPrivilegije() {
-        return privilegije;
-    }
-
-    public void setPrivilegije(int privilegije) {
-        this.privilegije = privilegije;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 
     public Set<Role> getRoles() {

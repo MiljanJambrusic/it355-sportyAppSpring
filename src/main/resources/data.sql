@@ -62,5 +62,5 @@ VALUES ('ADMIN');
 insert into role (role)
 VALUES ('NORMAL');
 
-insert into korisnici (email, ime, korisnickoime, password, prezime, privilegije) values ('test@test.rs','Marko','miki123','$2a$10$amlU1nGSyxYIjk6zQw/IIu5mlxMD7lGSyJrVPb0Wt2chR34ejiDCa','Markovic', 1);
+insert into korisnici (email, ime, korisnickoime, password, prezime) values ('test@test.rs','Marko','miki123','$2a$10$amlU1nGSyxYIjk6zQw/IIu5mlxMD7lGSyJrVPb0Wt2chR34ejiDCa','Markovic');
 insert into user_role (user_id, role_id) values (1, 1);
