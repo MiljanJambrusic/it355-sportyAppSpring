@@ -5,12 +5,9 @@
  */
 package com.sportyapp.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -38,6 +35,11 @@ public class Korisnici {
     private int privilegije;
     @Column(name = "token")
     private String token;
+    @ManyToMany
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
     
     public Korisnici() {
@@ -117,8 +119,12 @@ public class Korisnici {
     public void setToken(String token) {
         this.token = token;
     }
-    
-    
-    
-    
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 }

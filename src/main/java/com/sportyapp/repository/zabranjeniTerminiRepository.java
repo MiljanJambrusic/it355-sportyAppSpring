@@ -5,6 +5,7 @@
  */
 package com.sportyapp.repository;
 
+import com.sportyapp.model.Zabranjenitermini;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Repository;
  *
  * @author Kevin Durant
  */
-public interface zabranjeniTerminiRepository extends JpaRepository<zabranjeniTerminiRepository, Long>{
+@Repository
+public interface zabranjeniTerminiRepository extends JpaRepository<Zabranjenitermini, Long>{
     
 }
