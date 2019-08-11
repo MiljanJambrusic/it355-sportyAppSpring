@@ -38,6 +38,12 @@ public class Timovi {
         this.kreator = kreator;
     }
 
+    public Timovi(String nazivtima, String kreator) {
+        this.nazivtima = nazivtima;
+        this.kreator = kreator;
+    }
+
+    
     public int getId_tima() {
         return id_tima;
     }

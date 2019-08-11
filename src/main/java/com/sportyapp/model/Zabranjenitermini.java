@@ -37,6 +37,13 @@ public class Zabranjenitermini {
     public Zabranjenitermini() {
     }
 
+    public Zabranjenitermini(String sport, String mesec, int dan, String sat) {
+        this.sport = sport;
+        this.mesec = mesec;
+        this.dan = dan;
+        this.sat = sat;
+    }
+
     public Zabranjenitermini(int zabr_id, String sport, String mesec, int dan, String sat) {
         this.zabr_id = zabr_id;
         this.sport = sport;
